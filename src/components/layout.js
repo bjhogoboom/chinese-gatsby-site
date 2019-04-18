@@ -10,7 +10,12 @@ import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 
 import Header from "./header"
+import ChineseAppBar from "./chineseAppBar"
 import "./layout.css"
+import 'primereact/resources/themes/nova-light/theme.css';
+import 'primereact/resources/primereact.min.css';
+import 'primeicons/primeicons.css';
+
 
 const Layout = ({ children }) => (
   <StaticQuery
@@ -25,7 +30,7 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <Header siteTitle={data.site.siteMetadata.title} />
+        <ChineseAppBar />
         <div
           style={{
             margin: `0 auto`,
