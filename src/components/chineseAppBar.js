@@ -3,10 +3,12 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
+import { Link } from "gatsby";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import TemporaryDrawer from './chineseDrawer';
 
 const styles = {
   root: {
@@ -27,11 +29,12 @@ function ChineseAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
+          <TemporaryDrawer/>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Pomona College Chinese Pronunciation Tool
+            <Link to ="/" style={{
+              color: `white`,
+              textDecoration: `none`,
+            }}>Pomona College Chinese Pronunciation Tool</Link>
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>
