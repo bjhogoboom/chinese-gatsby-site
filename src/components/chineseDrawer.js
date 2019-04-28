@@ -6,13 +6,12 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
 import BookIcon from '@material-ui/icons/Book';
 import FontDownloadIcon from '@material-ui/icons/FontDownload';
-import AccountBoxIcon from '@material-ui/icons/AccountBox'
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 
 const styles = {
   list: {
@@ -56,9 +55,9 @@ class TemporaryDrawer extends React.Component {
             <ListItemIcon>
               <BookIcon color="primary"/>
             </ListItemIcon>
-            <ListItemText primary="IC2" />
+            <ListItemText primary="IC1" />
           </ListItemLink>
-          <ListItemLink key='IC2' href="/">
+          <ListItemLink key='IC2' href="/ic2">
             <ListItemIcon>
               <BookIcon color="secondary"/>
             </ListItemIcon>

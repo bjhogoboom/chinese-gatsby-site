@@ -18,7 +18,7 @@ import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 
 
-const Layout = ({ children }) => (
+const Layout = ({ children, gridDirection }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -42,7 +42,7 @@ const Layout = ({ children }) => (
             fontFamily: 'Roboto'
           }}
         >
-            <Grid container spacing={8} justify="center">{children}</Grid>
+            <Grid container spacing={8} alignItems="center" justify="center" direction={gridDirection}>{children}</Grid>
           <footer>
             © {new Date().getFullYear()}, Built with
             {` `}
