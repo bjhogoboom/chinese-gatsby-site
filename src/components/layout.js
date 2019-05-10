@@ -5,20 +5,17 @@
  * See: https://www.gatsbyjs.org/docs/static-query/
  */
 
-import React from "react"
 import PropTypes from "prop-types"
+import React from "react"
 import { StaticQuery, graphql } from "gatsby"
 
 import ChineseAppBar from "./chineseAppBar"
+
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 
-import 'primereact/resources/themes/nova-light/theme.css';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import 'primereact/resources/primereact.min.css';
-import 'primeicons/primeicons.css';
 
-
-const Layout = ({ children, gridDirection }) => (
+const Layout = ({ children, gridDirection, pageTitle }) => (
   <StaticQuery
     query={graphql`
       query SiteTitleQuery {
@@ -32,7 +29,7 @@ const Layout = ({ children, gridDirection }) => (
     render={data => (
       <React.Fragment>
         <CssBaseline/>
-        <ChineseAppBar />
+        <ChineseAppBar title={pageTitle} />
         <div
           style={{
             margin: `0 auto`,

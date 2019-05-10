@@ -1,10 +1,10 @@
+import PropTypes from 'prop-types';
 import React from "react";
 
-import PropTypes from 'prop-types';
-import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 function TabContainer(props) {
   return (
@@ -29,7 +29,7 @@ function generateList(numElements, book){
         arr.map((number) =>
           <ListItem>
             <Button
-              href={"/" + book + "/" + (number / 10 >= 1 ? number : "0" + number)}
+              href="/lesson1"
               variant="outlined"
               fullWidth>
                 Lesson {number}

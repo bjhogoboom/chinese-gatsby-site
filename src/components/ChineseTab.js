@@ -1,12 +1,15 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import React from 'react';
+
+import IC2 from './ic2';
+
 import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import BookIcon from '@material-ui/icons/Book';
 import FontDownloadIcon from '@material-ui/icons/FontDownload';
-import IC2 from './ic2';
+import Tab from '@material-ui/core/Tab';
+import Tabs from '@material-ui/core/Tabs';
+import { withStyles } from '@material-ui/core/styles';
+
 
 const styles = theme => ({
   root: {

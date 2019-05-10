@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import BookIcon from '@material-ui/icons/Book';
 import Drawer from '@material-ui/core/Drawer';
+import FontDownloadIcon from '@material-ui/icons/FontDownload';
+import HomeIcon from '@material-ui/icons/Home';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import HomeIcon from '@material-ui/icons/Home';
-import BookIcon from '@material-ui/icons/Book';
-import FontDownloadIcon from '@material-ui/icons/FontDownload';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { withStyles } from '@material-ui/core/styles';
+
 
 const styles = {
   list: {
