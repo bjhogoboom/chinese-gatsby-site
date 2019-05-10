@@ -1,6 +1,6 @@
 import React from "react";
 
-import ChineseTab from '../components/ChineseTab';
+import ChineseTab from '../components/chineseTab';
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 

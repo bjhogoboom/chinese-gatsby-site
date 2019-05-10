@@ -13,6 +13,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from '@material-ui/core/styles';
+import { withRouter } from "react-router";
+import queryString from 'query-string';
+
 
 const styles = theme => ({
   root: {
@@ -25,11 +28,16 @@ const styles = theme => ({
   },
 });
 
-let id = 0;
-function fillRows(data, lessonNum){
+let id = 1;
+function fillRows(data, lessonNum, book){
   const rows = [];
   data.allDataJson.edges.forEach(function(item){
-    const lesson = item.node.ICL1.lessons[lessonNum];
+    var lesson;
+    if(book === "ICL1"){
+      lesson = item.node.ICL1.lessons[lessonNum-1];
+    }else{
+      lesson = item.node.ICL2.lessons[lessonNum-1];
+    }
     for(var i = 0; i < lesson.characters.length; i++){
       var newRow = [id, lesson.characters[i], lesson.partsOfSpeech[i]];
       rows.push(newRow);
@@ -43,7 +51,7 @@ function fillRows(data, lessonNum){
           <TableRow key={row[0]}>
             <TableCell component="th" scope="row"><Typography variant="h4">{row[1]}</Typography></TableCell>
             <TableCell align="right"><Typography variant="subtitle1">{row[2]}</Typography></TableCell>
-            <TableCell align="right"><Button variant="outlined" color="primary" href={"/lesson" + (lessonNum+1) + "/" + row[0]}>Pronunciation Quiz</Button></TableCell>
+            <TableCell align="right"><Button variant="outlined" color="primary" href={"/vocab?book=" + book + "&lesson=" + lessonNum + "&number=" + row[0]}>Pronunciation Quiz</Button></TableCell>
           </TableRow>
         ))
       }
@@ -51,10 +59,13 @@ function fillRows(data, lessonNum){
   );
 }
 
-function Lesson1(props){
+function LessonPage(props){
+  console.log(props);
+  const parsed = queryString.parse(props.location.search);
+  console.log(parsed);
   const { classes } = props;
   return(
-    <Layout pageTitle="Lesson 1">
+    <Layout pageTitle={"Lesson " + parsed.lesson}>
       <StaticQuery
         query={graphql `
           query VocabularyQuery{
@@ -81,7 +92,7 @@ function Lesson1(props){
                     <TableCell align="right">Quiz</TableCell>
                   </TableRow>
                 </TableHead>
-                  {fillRows(data,0)}
+                  {fillRows(data,parsed.lesson, parsed.book)}
               </Table>
             </Paper>
           </>
@@ -91,4 +102,4 @@ function Lesson1(props){
   );
 }
 
-export default withStyles(styles)(Lesson1);
+export default withRouter(withStyles(styles)(LessonPage));

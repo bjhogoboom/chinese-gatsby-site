@@ -27,9 +27,9 @@ function generateList(numElements, book){
     <List>
       {
         arr.map((number) =>
-          <ListItem>
+          <ListItem key={book + number}>
             <Button
-              href="/lesson1"
+              href={"/lessons?book=" + book + "&lesson=" + number}
               variant="outlined"
               fullWidth>
                 Lesson {number}
@@ -41,7 +41,7 @@ function generateList(numElements, book){
   );
 }
 
-const IC2 = (props) => (
+const Book = (props) => (
     <TabContainer>
       <Typography variant="h4" gutterBottom>
         {props.long}
@@ -53,4 +53,4 @@ const IC2 = (props) => (
     </TabContainer>
 );
 
-export default IC2;
+export default Book;

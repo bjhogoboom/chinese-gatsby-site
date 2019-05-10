@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import IC2 from './ic2';
+import Book from './book';
 
 import AppBar from '@material-ui/core/AppBar';
 import BookIcon from '@material-ui/icons/Book';
@@ -48,9 +48,9 @@ class ChineseTab extends React.Component {
             <Tab label="IC2" icon={<BookIcon />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <IC2 lessons={20} long="Integrated Chinese Level 1" short="ICL1">Item One</IC2>}
-        {value === 1 && <IC2 long="Consonants and Vowels" short="CVE">Item Two</IC2>}
-        {value === 2 && <IC2 lessons={15} long="Integrated Chinese Level 2" short="ICL2">Item Three</IC2>}
+        {value === 0 && <Book lessons={20} long="Integrated Chinese Level 1" short="ICL1">Item One</Book>}
+        {value === 1 && <Book long="Consonants and Vowels" short="CVE">Item Two</Book>}
+        {value === 2 && <Book lessons={15} long="Integrated Chinese Level 2" short="ICL2">Item Three</Book>}
       </div>
     );
   }
