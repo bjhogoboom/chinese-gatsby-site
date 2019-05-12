@@ -29,7 +29,7 @@ function ListItemLink(props) {
   return <ListItem button component="a" {...props} />;
 }
 
-class TemporaryDrawer extends React.Component {
+class ChineseDrawer extends React.Component {
 
   state = {
     left: false
@@ -101,8 +101,8 @@ class TemporaryDrawer extends React.Component {
   }
 }
 
-TemporaryDrawer.propTypes = {
+ChineseDrawer.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(TemporaryDrawer);
+export default withStyles(styles)(ChineseDrawer);

@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Book from './book';
+import CVEList from './cveList';
 
 import AppBar from '@material-ui/core/AppBar';
 import BookIcon from '@material-ui/icons/Book';
@@ -49,7 +50,7 @@ class ChineseTab extends React.Component {
           </Tabs>
         </AppBar>
         {value === 0 && <Book lessons={20} long="Integrated Chinese Level 1" short="ICL1">Item One</Book>}
-        {value === 1 && <Book long="Consonants and Vowels" short="CVE">Item Two</Book>}
+        {value === 1 && <CVEList long="Consonants and Vowels" short="CVE">Item Two</CVEList>}
         {value === 2 && <Book lessons={15} long="Integrated Chinese Level 2" short="ICL2">Item Three</Book>}
       </div>
     );

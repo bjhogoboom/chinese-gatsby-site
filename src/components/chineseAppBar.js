@@ -1,11 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import TemporaryDrawer from './chineseDrawer';
+import AboutDialog from "./AboutDialog";
 
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import HomeIcon from '@material-ui/icons/Home';
 import Toolbar from '@material-ui/core/Toolbar';
+import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -29,13 +31,17 @@ function ChineseAppBar(props) {
     <div className={classes.root}>
       <AppBar position="static" style={{marginBottom:10}}>
         <Toolbar>
-          <TemporaryDrawer/>
+          <Tooltip title="Home">
+            <IconButton className={classes.menuButton} color="inherit" href="/">
+              <HomeIcon/>
+            </IconButton>
+          </Tooltip>
           <Typography variant="h6" color="inherit" className={classes.grow} style={{
               color: `white`,
               textDecoration: `none`,
             }}>{props.title}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <AboutDialog/>
         </Toolbar>
       </AppBar>
     </div>
