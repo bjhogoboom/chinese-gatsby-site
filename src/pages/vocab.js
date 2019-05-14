@@ -3,6 +3,7 @@ import { StaticQuery, graphql } from "gatsby";
 import queryString from 'query-string';
 
 import ChineseQuiz from "../components/ChineseQuiz";
+import IndexPage from "./index";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 
@@ -62,40 +63,42 @@ function audioPaths(data, lessonNum, characterNum, book){
     paths.push(basePath + i + ".mp3");
   }
 
-  console.log("PATHs: " + paths);
   return paths;
 }
 
 function VocabPage(props){
   const parsed = queryString.parse(props.location.search);
-  console.log("BOOK: " + parsed.book);
-  return(
-      <StaticQuery
-        query={graphql `
-          query VocabularyQuery2{
-            allDataJson {
-              edges {
-                node {
-                  ICL1 {lessons {characters, fileEndings}}
-                  ICL2 {lessons {characters, fileEndings}}
+  if(parsed.lesson && parsed.number && parsed.book){
+    return(
+        <StaticQuery
+          query={graphql `
+            query VocabularyQuery2{
+              allDataJson {
+                edges {
+                  node {
+                    ICL1 {lessons {characters, fileEndings}}
+                    ICL2 {lessons {characters, fileEndings}}
+                  }
                 }
               }
             }
-          }
 
-          `}
-        render={data => (
-          <Layout gridDirection="column" pageTitle={"Pronuncation Quiz: " + getCharacter(data, parsed.lesson, parsed.number, parsed.book)}>
-            <SEO title={getCharacter(data, parsed.lesson, parsed.number) + " Pronuncation Quiz"} />
-            <Typography component="p" variant="h5" align="center" paragraph>
-              Listen to the following audio files and try to figure out which is the proper pronunciation.
-              Make your choice using one of the guess buttons. Repeat the process using the shuffle button!
-            </Typography>
-            <ChineseQuiz audioFiles={audioPaths(data, parsed.lesson, parsed.number, parsed.book)} />
-          </Layout>
-        )}
-      />
-  );
+            `}
+          render={data => (
+            <Layout gridDirection="column" pageTitle={"Pronuncation Quiz: " + getCharacter(data, parsed.lesson, parsed.number, parsed.book)}>
+              <SEO title={getCharacter(data, parsed.lesson, parsed.number) + " Pronuncation Quiz"} />
+              <Typography component="p" variant="h5" align="center" paragraph>
+                Listen to the following audio files and try to figure out which is the proper pronunciation.
+                Make your choice using one of the guess buttons. Repeat the process using the shuffle button!
+              </Typography>
+              <ChineseQuiz audioFiles={audioPaths(data, parsed.lesson, parsed.number, parsed.book)} />
+            </Layout>
+          )}
+        />
+    );
+  }else{
+    return (<IndexPage />);
+  }
 }
 
 export default withStyles(styles)(VocabPage);

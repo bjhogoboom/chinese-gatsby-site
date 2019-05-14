@@ -42,14 +42,10 @@ const styles = theme => ({
 
 function playAudio(path){
   var aud = new Audio(path);
-  console.log("AUDIO: " + path);
   aud.play();
-  console.log("PLAYED");
 }
 
 function QuizOption(props){
-  //console.log("PASSED OPTION: " + props.path);
-  console.log("VALUE: " + props.number);
   const { classes } = props;
   return(
     <Grid item xs={12}>

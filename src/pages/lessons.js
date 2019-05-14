@@ -1,8 +1,9 @@
 import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import IndexPage from "./index";
+import Layout from "../components/layout";
+import SEO from "../components/seo";
 
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -59,46 +60,49 @@ function fillRows(data, lessonNum, book){
 }
 
 function LessonPage(props){
-  console.log(props);
   const parsed = queryString.parse(props.location.search);
-  console.log(parsed);
   const { classes } = props;
-  return(
-    <Layout pageTitle={"Lesson " + parsed.lesson}>
-      <StaticQuery
-        query={graphql `
-          query VocabularyQuery{
-            allDataJson {
-              edges {
-                node {
-                  ICL1 {lessons {characters, partsOfSpeech}}
-                  ICL2 {lessons {characters, partsOfSpeech}}
+  if(parsed.lesson && parsed.book){
+    return(
+      <Layout pageTitle={"Lesson " + parsed.lesson}>
+        <StaticQuery
+          query={graphql `
+            query VocabularyQuery{
+              allDataJson {
+                edges {
+                  node {
+                    ICL1 {lessons {characters, partsOfSpeech}}
+                    ICL2 {lessons {characters, partsOfSpeech}}
+                  }
                 }
               }
             }
-          }
 
-          `}
-        render={data => (
-          <>
-            <SEO title="Page two" />
-            <Paper className={classes.root}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Character</TableCell>
-                    <TableCell align="right">Part of Speech</TableCell>
-                    <TableCell align="right">Quiz</TableCell>
-                  </TableRow>
-                </TableHead>
-                  {fillRows(data,parsed.lesson, parsed.book)}
-              </Table>
-            </Paper>
-          </>
-        )}
-      />
-    </Layout>
-  );
+            `}
+          render={data => (
+            <>
+              <SEO title="Page two" />
+              <Paper className={classes.root}>
+                <Table className={classes.table}>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Character</TableCell>
+                      <TableCell align="right">Part of Speech</TableCell>
+                      <TableCell align="right">Quiz</TableCell>
+                    </TableRow>
+                  </TableHead>
+                    {fillRows(data,parsed.lesson, parsed.book)}
+                </Table>
+              </Paper>
+            </>
+          )}
+        />
+      </Layout>
+    );
+  } else {
+    return <IndexPage />;
+  }
+
 }
 
 export default withStyles(styles)(LessonPage);
