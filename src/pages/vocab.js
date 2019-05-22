@@ -1,14 +1,14 @@
 import React from "react";
-import { StaticQuery, graphql } from "gatsby";
 import queryString from 'query-string';
 
 import ChineseQuiz from "../components/ChineseQuiz";
-import IndexPage from "./index";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
 
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+
+import Vocabulary from "../data/Vocabulary";
+
 
 const styles = theme => ({
   card: {
@@ -37,32 +37,20 @@ const styles = theme => ({
   },
 });
 
-function getCharacter(data, lessonNum, characterNum, book){
-  if(book === "ICL1"){
-    return data.allDataJson.edges[0].node.ICL1.lessons[lessonNum-1].characters[characterNum-1];
-  }else{
-    return data.allDataJson.edges[0].node.ICL2.lessons[lessonNum-1].characters[characterNum-1];
-  }
+function getCharacter(lessonNum, characterNum, book){
+  return Vocabulary[book].lessons[lessonNum-1].characters[characterNum-1];
 }
 
-function audioPaths(data, lessonNum, characterNum, book){
-  var fileEnding;
-  if(book === "ICL1"){
-    fileEnding = data.allDataJson.edges[0].node.ICL1.lessons[lessonNum-1].fileEndings[characterNum-1];
-  }else{
-    fileEnding = data.allDataJson.edges[0].node.ICL2.lessons[lessonNum-1].fileEndings[characterNum-1];
-  }
+function audioPaths(lessonNum, characterNum, book){
+  var fileEnding = Vocabulary[book].lessons[lessonNum-1].fileEndings[characterNum-1];
   var pathLesson = lessonNum < 10 ? "0" + lessonNum : lessonNum;
   var pathCharacter = characterNum < 10 ? "00" + characterNum : "0" + characterNum;
 
   var paths = [];
-  var basePath = "/audio/" + book + "/" + pathLesson + "/" + pathLesson + pathCharacter + "/" + book + pathLesson + fileEnding;
-  paths.push(basePath + ".mp3");
-
+  paths.push([book, pathLesson, pathLesson + pathCharacter, book + pathLesson + fileEnding]);
   for(var i = 1; i < 4; i++){
-    paths.push(basePath + i + ".mp3");
+    paths.push([book, pathLesson, pathLesson + pathCharacter, book + pathLesson + fileEnding + i]);
   }
-
   return paths;
 }
 
@@ -70,34 +58,16 @@ function VocabPage(props){
   const parsed = queryString.parse(props.location.search);
   if(parsed.lesson && parsed.number && parsed.book){
     return(
-        <StaticQuery
-          query={graphql `
-            query VocabularyQuery2{
-              allDataJson {
-                edges {
-                  node {
-                    ICL1 {lessons {characters, fileEndings}}
-                    ICL2 {lessons {characters, fileEndings}}
-                  }
-                }
-              }
-            }
-
-            `}
-          render={data => (
-            <Layout gridDirection="column" pageTitle={"Pronuncation Quiz: " + getCharacter(data, parsed.lesson, parsed.number, parsed.book)}>
-              <SEO title={getCharacter(data, parsed.lesson, parsed.number) + " Pronuncation Quiz"} />
-              <Typography component="p" variant="h5" align="center" paragraph>
-                Listen to the following audio files and try to figure out which is the proper pronunciation.
-                Make your choice using one of the guess buttons. Repeat the process using the shuffle button!
-              </Typography>
-              <ChineseQuiz audioFiles={audioPaths(data, parsed.lesson, parsed.number, parsed.book)} />
-            </Layout>
-          )}
-        />
+      <Layout gridDirection="column" pageTitle={"Pronuncation Quiz: " + getCharacter(parsed.lesson, parsed.number, parsed.book)}>
+        <Typography component="p" variant="h5" align="center" paragraph>
+          Listen to the following audio files and try to figure out which is the proper pronunciation.
+          Make your choice using one of the guess buttons. Repeat the process using the shuffle button!
+        </Typography>
+        <ChineseQuiz audioFiles={audioPaths(parsed.lesson, parsed.number, parsed.book)} />
+      </Layout>
     );
   }else{
-    return (<IndexPage />);
+    console.log("Redirect");
   }
 }
 

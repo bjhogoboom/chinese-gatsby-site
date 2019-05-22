@@ -66,9 +66,9 @@ class ChineseQuiz extends React.Component {
   }
 
   guessOption(number){
-    var path = this.state.options[number-1];
+    var path = this.state.options[number-1][3];
     var reg = new RegExp('^[0-9]$');
-    if (!reg.test(path.charAt(path.length - 5))){
+    if (!reg.test(path.charAt(path.length - 1))){
       this.setState(
         {
           guessSnackbarOpen:true,

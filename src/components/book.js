@@ -29,7 +29,7 @@ function generateList(numElements, book){
         arr.map((number) =>
           <ListItem key={book + number}>
             <Button
-              href={"/lessons?book=" + book + "&lesson=" + number}
+              href={"/#/lessons?book=" + book + "&lesson=" + number}
               variant="outlined"
               fullWidth>
                 Lesson {number}

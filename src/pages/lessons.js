@@ -1,9 +1,7 @@
 import React from "react";
-import { StaticQuery, graphql } from "gatsby";
 
-import IndexPage from "./index";
 import Layout from "../components/layout";
-import SEO from "../components/seo";
+// import SEO from "../components/seo";
 
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -13,8 +11,9 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Typography from "@material-ui/core/Typography";
-import { withStyles } from '@material-ui/core/styles';
-import queryString from 'query-string';
+import { withStyles } from "@material-ui/core/styles";
+import queryString from "query-string";
+import Vocabulary from "../data/Vocabulary";
 
 
 const styles = theme => ({
@@ -28,22 +27,18 @@ const styles = theme => ({
   },
 });
 
-let id = 1;
-function fillRows(data, lessonNum, book){
+function fillRows(lessonNum, book){
+  var id = 1;
   const rows = [];
-  data.allDataJson.edges.forEach(function(item){
-    var lesson;
-    if(book === "ICL1"){
-      lesson = item.node.ICL1.lessons[lessonNum-1];
-    }else{
-      lesson = item.node.ICL2.lessons[lessonNum-1];
-    }
-    for(var i = 0; i < lesson.characters.length; i++){
-      var newRow = [id, lesson.characters[i], lesson.partsOfSpeech[i]];
-      rows.push(newRow);
-      id++;
-    }
-  });
+
+  var lesson = Vocabulary[book].lessons[lessonNum - 1]
+
+  for(var i = 0; i < lesson.characters.length; i++){
+    var newRow = [id, lesson.characters[i], lesson.partsOfSpeech[i]];
+    rows.push(newRow);
+    id++;
+  }
+
   return (
     <TableBody>
       {
@@ -51,7 +46,7 @@ function fillRows(data, lessonNum, book){
           <TableRow key={row[0]}>
             <TableCell component="th" scope="row"><Typography variant="h4">{row[1]}</Typography></TableCell>
             <TableCell align="right"><Typography variant="subtitle1">{row[2]}</Typography></TableCell>
-            <TableCell align="right"><Button variant="outlined" color="primary" href={"/vocab?book=" + book + "&lesson=" + lessonNum + "&number=" + row[0]}>Pronunciation Quiz</Button></TableCell>
+            <TableCell align="right"><Button variant="outlined" color="primary" href={"/#/vocab?book=" + book + "&lesson=" + lessonNum + "&number=" + row[0]}>Pronunciation Quiz</Button></TableCell>
           </TableRow>
         ))
       }
@@ -63,44 +58,25 @@ function LessonPage(props){
   const parsed = queryString.parse(props.location.search);
   const { classes } = props;
   if(parsed.lesson && parsed.book){
-    return(
+    return (
       <Layout pageTitle={"Lesson " + parsed.lesson}>
-        <StaticQuery
-          query={graphql `
-            query VocabularyQuery{
-              allDataJson {
-                edges {
-                  node {
-                    ICL1 {lessons {characters, partsOfSpeech}}
-                    ICL2 {lessons {characters, partsOfSpeech}}
-                  }
-                }
-              }
-            }
-
-            `}
-          render={data => (
-            <>
-              <SEO title="Page two" />
-              <Paper className={classes.root}>
-                <Table className={classes.table}>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Character</TableCell>
-                      <TableCell align="right">Part of Speech</TableCell>
-                      <TableCell align="right">Quiz</TableCell>
-                    </TableRow>
-                  </TableHead>
-                    {fillRows(data,parsed.lesson, parsed.book)}
-                </Table>
-              </Paper>
-            </>
-          )}
-        />
+        {/* <SEO title="Page two" /> */}
+        <Paper className={classes.root}>
+          <Table className={classes.table}>
+            <TableHead>
+              <TableRow>
+                <TableCell>Character</TableCell>
+                <TableCell align="right">Part of Speech</TableCell>
+                <TableCell align="right">Quiz</TableCell>
+              </TableRow>
+            </TableHead>
+            {fillRows(parsed.lesson, parsed.book)}
+          </Table>
+        </Paper>
       </Layout>
-    );
+    )
   } else {
-    return <IndexPage />;
+    console.log('Redirect');
   }
 
 }

@@ -18,6 +18,7 @@
     "gatsby-source-filesystem": "^2.0.32",
     "gatsby-transformer-json": "^2.1.11",
     "gatsby-transformer-sharp": "^2.1.17",
+    "parcel-bundler": "^1.12.3",
     "primeicons": "^1.0.0",
     "primereact": "^3.1.2",
     "prop-types": "^15.7.2",
@@ -29,6 +30,9 @@
     "typescript": "^3.4.5"
   },
   "devDependencies": {
+    "@babel/core": "^7.4.4",
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
     "prettier": "^1.16.4"
   },
   "keywords": [
@@ -36,12 +40,8 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "format": "prettier --write src/**/*.{js,jsx}",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "build": "parcel build static/index.html",
+    "start": "parcel static/index.html"
   },
   "repository": {
     "type": "git",
@@ -49,5 +49,13 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
+    ]
   }
 }

@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from '@material-ui/core/styles';
+import audioFiles from "../../static/audio/**/**/**/*.mp3";
 
 const styles = theme => ({
   card: {
@@ -41,7 +42,7 @@ const styles = theme => ({
 });
 
 function playAudio(path){
-  var aud = new Audio(path);
+  var aud = new Audio(audioFiles[path[0]][path[1]][path[2]][path[3]]);
   aud.play();
 }
 

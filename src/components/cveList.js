@@ -48,7 +48,7 @@ function generateList(){
           consonants.map((consonant) =>
             <ListItem key={consonant}>
               <Button
-                href={"/cve?consonantVowel=" + consonant + "&isConsonant=true"}
+                href={"/#/cve?consonantVowel=" + consonant + "&isConsonant=true"}
                 variant="outlined"
                 fullWidth>
                   {consonant}
@@ -63,7 +63,7 @@ function generateList(){
           vowels.map((vowel) =>
             <ListItem key={vowel}>
               <Button
-                href={"/cve?consonantVowel=" + vowel + "&isConsonant=false"}
+                href={"/#/cve?consonantVowel=" + vowel + "&isConsonant=false"}
                 variant="outlined"
                 fullWidth>
                   {vowel}
