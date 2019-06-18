@@ -44,9 +44,9 @@ class ChineseTab extends React.Component {
             textColor="secondary"
             centered
           >
-            <Tab label="IC1" icon={<BookIcon />} />
+            <Tab label="ICL1" icon={<BookIcon />} />
             <Tab label="CVE" icon={<FontDownloadIcon />} />
-            <Tab label="IC2" icon={<BookIcon />} />
+            <Tab label="ICL2" icon={<BookIcon />} />
           </Tabs>
         </AppBar>
         {value === 0 && <Book lessons={20} long="Integrated Chinese Level 1" short="ICL1">Item One</Book>}
