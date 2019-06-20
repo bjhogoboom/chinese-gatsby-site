@@ -44,14 +44,14 @@ class ChineseTab extends React.Component {
             textColor="secondary"
             centered
           >
-            <Tab label="ICL1" icon={<BookIcon />} />
+            <Tab label="IC1" icon={<BookIcon />} />
             <Tab label="CVE" icon={<FontDownloadIcon />} />
-            <Tab label="ICL2" icon={<BookIcon />} />
+            <Tab label="IC2" icon={<BookIcon />} />
           </Tabs>
         </AppBar>
-        {value === 0 && <Book lessons={20} long="Integrated Chinese Level 1" short="ICL1">Item One</Book>}
+        {value === 0 && <Book lessons={20} long="Integrated Chinese Level 1" short="IC1">Item One</Book>}
         {value === 1 && <CVEList long="Consonants and Vowels" short="CVE">Item Two</CVEList>}
-        {value === 2 && <Book lessons={15} long="Integrated Chinese Level 2" short="ICL2">Item Three</Book>}
+        {value === 2 && <Book lessons={15} long="Integrated Chinese Level 2" short="IC2">Item Three</Book>}
       </div>
     );
   }

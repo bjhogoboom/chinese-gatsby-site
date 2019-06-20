@@ -42,7 +42,9 @@ const styles = theme => ({
 });
 
 function playAudio(path){
-  var aud = new Audio(audioFiles[path[0]][path[1]][path[2]][path[3]]);
+  var book = "ICL" + path[0].charAt(2);
+  var file = "ICL" + path[3].substring(2);
+  var aud = new Audio(audioFiles[book][path[1]][path[2]][file]);
   aud.play();
 }
 

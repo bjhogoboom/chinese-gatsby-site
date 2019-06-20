@@ -17,7 +17,7 @@ export default () => (
       <Grid item xs={12}>
         <Typography component="p" variant="h5" align="center" paragraph>This tool is designed for students wanting to practice their Chinese pronunciation skills
            through careful listening. Here, you will find small quizlets for practicing your pronunciation
-           of various vocabulary words in the Integrated Chinese Level 1 and 2 textbooks (ICL1&ICL2), as well as guides
+           of various vocabulary words in the Integrated Chinese Level 1 and 2 textbooks (IC1&IC2), as well as guides
            for basic Chinese consonants and vowels (CVE).
         </Typography>
       </Grid>
